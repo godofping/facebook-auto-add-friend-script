@@ -40,11 +40,16 @@ class FacebookBot:
 
 			for link in links:
 				bot.get(link)
-				time.sleep(10)
+				time.sleep(5)
+				try:
+					bot.find_elements_by_class_name("addButton")[0].click()
+					time.sleep(5)
+				except Exception as e:
+					time.sleep(5)
 
-				bot.find_elements_by_class_name("addButton")[0].click()
+				
 				
 #change the email, pass and keyword
 re = FacebookBot('email','pass')
 re.login()
-re.addFriend('keyword')
+re.addFriend('key word')
