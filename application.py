@@ -30,26 +30,25 @@ class FacebookBot:
 		bot = self.bot
 		bot.get('https://www.facebook.com/search/people/?q=' + key_words + '&epa=SEARCH_BOX')
 		time.sleep(3)
-		for i in range(1,5):
+		for i in range(1,50):
 			bot.execute_script('window.scrollTo(0, document.body.scrollHeight)')
 			time.sleep(2)
 			friends = bot.find_elements_by_class_name('_2ial')
 			links = [elem.get_attribute('href') for elem in friends]
 
 
-
-			for link in links:
-				bot.get(link)
+		for link in links:
+			bot.get(link)
+			time.sleep(5)
+			try:
+				bot.find_elements_by_class_name("addButton")[0].click()
 				time.sleep(5)
-				try:
-					bot.find_elements_by_class_name("addButton")[0].click()
-					time.sleep(5)
-				except Exception as e:
-					time.sleep(5)
+			except Exception as e:
+				time.sleep(5)
 
 				
 				
 #change the email, pass and keyword
 re = FacebookBot('email','pass')
 re.login()
-re.addFriend('key word')
+re.addFriend('keyword')
